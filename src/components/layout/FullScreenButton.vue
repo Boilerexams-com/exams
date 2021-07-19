@@ -44,7 +44,7 @@
 
 <style scoped lang="css">
   .full-screen-button {
-    margin-left: auto;
+    
   }
   .full-screen-button button:focus,.full-screen-button button:active {
     outline: none !important;

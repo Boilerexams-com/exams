@@ -26,18 +26,16 @@
 
           </b-navbar-nav>
         </b-collapse>
-        <answer-mode-button />
       </b-navbar>
     </section>
   </transition>
 </template>
 
 <script lang="js">
-import AnswerModeButton from "./AnswerModeButton.vue";
   export default  {
     name: 'nav-bar',
     components: {
-      AnswerModeButton
+      
     },
     props: ['cs159Exams'],
     mounted () {

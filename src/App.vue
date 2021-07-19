@@ -2,6 +2,7 @@
   <div id="app">
     <nav-bar :cs159Exams="JSON.parse(JSON.stringify(cs159Exams))"/>
     <div :class="toggleNavBar" class="d-flex w-100 position-fixed px-2">
+      <answer-mode-button/>
       <full-screen-button/>
     </div>
     <div :class="toggleNavBar" class="px-4">
@@ -15,14 +16,16 @@
 import NavBar from './components/layout/NavBar.vue';
 import FullScreenButton from './components/layout/FullScreenButton.vue';
 import ExamQuestion from './components/layout/ExamQuestion.vue';
-import cs159ExamsJson from './assets/cs159exams.json'
+import cs159ExamsJson from './assets/cs159exams.json';
+import AnswerModeButton from './components/layout/AnswerModeButton.vue';
 
 export default {
   name: 'App',
   components: {
     NavBar,
     FullScreenButton,
-    ExamQuestion
+    ExamQuestion,
+    AnswerModeButton
   },
   mounted () {
     this.$root.$on('toggle fullscreen', () => {

@@ -1,7 +1,11 @@
 <template lang="html">
 
-  <section class="answer-mode-button mx-2">
-    <b-button :variant="mode" @click="toggleMode" :disabled="isDisabled">{{mode === 'outline-dark' ? 'Video Mode' : 'Answer Mode'}}</b-button>
+  <section class="answer-mode-button ">
+    <b-button @click="toggleMode" :disabled="isDisabled" class="p-2" variant="dark-outline">
+      <transition name="fade">
+        <b-icon :icon="icon" font-scale="1.5" style="color: white"></b-icon>
+      </transition>      
+    </b-button>
   </section>
 
 </template>
@@ -18,18 +22,20 @@
     },
     data () {
       return {
-        mode: "outline-dark",
-        isDisabled: true
+        isDisabled: false,
+        icon: "eye-slash-fill"
       }
     },
     methods: {
       toggleMode() {
-        if(this.mode === "success") {
-          this.mode = "outline-dark";
+        if(this.icon === "eye-slash-fill") {
+          this.icon = "check2-square";
         }
         else {
-          this.mode = "success";
+          this.icon = "eye-slash-fill";
         }
+        
+        this.$root.$emit('toggle answer mode', this.icon === "eye-slash-fill" ? false : true);
       }
     },
     computed: {
@@ -42,6 +48,6 @@
 
 <style scoped lang="css">
   .answer-mode-button {
-
+    margin-left: auto;
   }
 </style>

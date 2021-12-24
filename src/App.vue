@@ -6,8 +6,10 @@
       <full-screen-button/>
     </div>
     <div :class="toggleNavBar" class="px-4">
-      <exam-question :isExamChoosen="isExamChoosen" :choosenExam="choosenExam"></exam-question>
+      <exam-question :isExamChoosen="isExamChoosen" :choosenExam="choosenExam" :numQuestions="numQuestions"></exam-question>
     </div>
+    <div class="h-100"></div>
+    <img class="corner-logo m-2" src="./assets/boilerexams-logo.png">
   </div>
 </template>
 
@@ -32,8 +34,14 @@ export default {
       this.toggleNavBar = this.toggleNavBar === "pt-58" ? "" : "pt-58";
     }),
     this.$root.$on('exam selected', (exam) => {
-      console.log(exam);
+      console.log(exam.questions.length);
       this.choosenExam = exam;
+      var count = 0;
+      for(var question in exam.questions) {
+        if(question != null)
+          count++;
+      }
+      this.numQuestions = count;
       this.isExamChoosen = true;
     })
   },
@@ -42,6 +50,7 @@ export default {
       toggleNavBar: "pt-58",
       cs159Exams: cs159ExamsJson["exams"],
       isExamChoosen: false,
+      numQuestions: 0,
       choosenExam: {}
     }
   }
@@ -71,4 +80,19 @@ button:focus,button:active {
 .pt-58 {
   padding-top: 60px;
 }
+.corner-logo {
+  position: fixed;
+  bottom: 20px;
+  opacity: 60%;
+  right: 0;
+  width: 54px;
+  height: 54px;
+  display: none;
+}
+
+@media print {
+    .corner-logo {
+      display: block;
+    }
+  }
 </style>

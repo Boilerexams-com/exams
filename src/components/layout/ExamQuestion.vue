@@ -2,6 +2,13 @@
 
   <section class="exam-question">
     <template v-if="isExamChoosen">
+      <div class="px-4 title-page new-page">
+        <b-button class="title-header" variant="outline-light">CS 159</b-button>
+        <h2 v-html='choosenExam.semester + " " + choosenExam.exam'></h2>
+        <h4 v-html='numQuestions + " questions"'></h4>
+        <img class="center-logo m-2" src="../../assets/boilerexams-logo.png">
+        <p>The content of these exams does not belong to Boilerexams. The Purdue CS 159 staff created and owns the rights to these exams.</p>
+      </div>
       <template v-for="(questions, index) in choosenExam.questions">
         <b-row :key="index" class="d-flex new-page py-4 h-100">
           <template v-if="questions.type !== 'tf'">
@@ -10,7 +17,7 @@
               <template v-for="(answer, index) in questions.answers">
                 <div :key="answer" class="d-flex">
                   <p v-html="index + ')'" class="px-2"></p>
-                  <p :class="index !== 'D' ? 'code-answer' : ''" v-html="answer"></p>
+                  <pre :class="index !== 'D' ? 'code-answer' : ''" v-html="answer"></pre>
                   <template v-if="questions['correct-answer'] === index && showAnswers">
                       <b-icon icon="check2" font-scale="1.5" class="mx-2 text-success"></b-icon>
                   </template>
@@ -19,7 +26,7 @@
             </b-col>
             <b-col sm="auto">
               <code-highlight language="c">
-                <pre v-html="questions.code"></pre>
+                <pre v-html="questions.code" class="z-index: 2;"></pre>
               </code-highlight>
             </b-col>
           </template>
@@ -52,7 +59,7 @@ import 'prism-es6/components/prism-c';
 
   export default  {
     name: 'exam-question',
-    props: ['isExamChoosen', 'choosenExam'],
+    props: ['isExamChoosen', 'choosenExam','numQuestions'],
     components: {
       CodeHighlight
     },
@@ -67,10 +74,13 @@ import 'prism-es6/components/prism-c';
       }
     },
     methods: {
-
+  
     },
     computed: {
-
+      
+    },
+    watch: {
+      
     }
 }
 
@@ -90,6 +100,9 @@ import 'prism-es6/components/prism-c';
     .new-page {
       page-break-after: always;
     }
+    .title-page {
+      padding-top: 120px;
+    }
   }
   .correct-answer {
     color: green;
@@ -99,6 +112,33 @@ import 'prism-es6/components/prism-c';
   }
   h6 {
     line-height: 1.6;
+  }
+  .title-page {
+    text-align: center;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+  }
+  .title-page p{
+    margin: 440px auto auto auto;
+    width: 50%;
+  }
+  .title-header {
+    color: #d0ba92;
+    border: #d0ba92 1px solid;
+    margin-bottom: 20px;
+    font-size: 48px;
+    font-weight: 600;
+  }
+  .center-logo {
+    width: 108px;
+    height: 108px;
+    display: none;
+  }
+  pre {
+    white-space: pre-wrap;       /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
   }
   /* pre {
     line-height: 17px;

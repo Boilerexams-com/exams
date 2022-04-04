@@ -72,6 +72,7 @@
               this.semesters.semesterList.push(this.cs159Exams[i]["semester"]);
             }
           }
+          this.semesters.semesterList.sort().reverse();
         }
       },
       selectSemester(semesterName) {
